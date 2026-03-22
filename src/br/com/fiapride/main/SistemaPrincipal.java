@@ -4,13 +4,20 @@ import br.com.fiapride.model.Carro;
 
 public class SistemaPrincipal {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		// Agora obrigatoriamente passando dados no construtor
-		Carro meuCarro = new Carro("Preto", "Aço", 10);
-		Carro carroDoJorge = new Carro("Cinza", "Aço", 15);
+        // Instanciação segura conforme as regras do Módulo de Frota
+        Carro v1 = new Carro("Carlos", "ABC-1234", 0);
 
-		System.out.println("Meu carro é: " + meuCarro.getCor());
-		System.out.println("O do Jorge é: " + carroDoJorge.getCor());
-	}
+        // Operações de fluxo de combustível
+        v1.adicionarGasolina(50);
+        v1.gastarGasolina(10);
+
+        // Saída de dados profissional e limpa
+        System.out.println("--- Relatório de Veículo FiapRide ---");
+        System.out.println("Condutor: " + v1.getIndividuo());
+        System.out.println("Placa: " + v1.getPlaca());
+        System.out.println("Nível de Combustível: " + v1.getGasolina() + "L");
+        System.out.println("-------------------------------------");
+    }
 }

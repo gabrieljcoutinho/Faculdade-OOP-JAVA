@@ -2,40 +2,59 @@ package br.com.fiapride.model;
 
 public class Carro {
 
-	// Características do objeto (agora encapsuladas)
-	private String cor;
-	private int somEmDb;
-	private String material;
+    private String individuo;
+    private String placa;
+    private double gasolina;
 
-	// Construtor com atributos essenciais
-	public Carro(String cor, String material, int somEmDb) {
-		this.setCor(cor);
-		this.setMaterial(material);
-		this.setSomEmDb(somEmDb);
-	}
+    // Construtor robusto: garante que o objeto não nasça com dados inválidos
+    public Carro(String individuo, String placa, double gasolina) {
+        this.individuo = individuo;
+        this.placa = placa;
+        setGasolina(gasolina);
+    }
 
-	// Getters e Setters
-	public String getCor() {
-		return cor;
-	}
+    // Método de negócio: Abastecer (impede valores negativos ou zerados)
+    public void adicionarGasolina(double quantidade) {
+        if (quantidade > 0) {
+            this.gasolina += quantidade;
+            System.out.println("Sucesso: Abastecimento de " + quantidade + "L realizado.");
+        } else {
+            System.out.println("Erro: Quantidade de abastecimento inválida.");
+        }
+    }
 
-	public void setCor(String cor) {
-		this.cor = cor;
-	}
+    // Método de negócio: Consumo (impede que o carro rode sem combustível)
+    public void gastarGasolina(double quantidade) {
+        if (quantidade > 0 && (this.gasolina - quantidade >= 0)) {
+            this.gasolina -= quantidade;
+        } else {
+            System.out.println("Alerta: Combustível insuficiente para esta operação.");
+        }
+    }
 
-	public int getSomEmDb() {
-		return somEmDb;
-	}
+    // Getters e Setters com proteção
+    public String getIndividuo() {
+        return individuo;
+    }
 
-	public void setSomEmDb(int somEmDb) {
-		this.somEmDb = somEmDb;
-	}
+    public void setIndividuo(String individuo) {
+        this.individuo = individuo;
+    }
 
-	public String getMaterial() {
-		return material;
-	}
+    public String getPlaca() {
+        return placa;
+    }
 
-	public void setMaterial(String material) {
-		this.material = material;
-	}
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public double getGasolina() {
+        return gasolina;
+    }
+
+    public void setGasolina(double gasolina) {
+        // Blindagem: se tentarem setar valor negativo, o sistema assume 0
+        this.gasolina = Math.max(0, gasolina);
+    }
 }
