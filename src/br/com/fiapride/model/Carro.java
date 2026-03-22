@@ -1,6 +1,6 @@
 package br.com.fiapride.model;
 
-public class Violao {
+public class Carro {
 	//Caracteristicas do objeto:
 	public String cor;
 	public int somEmDb;
